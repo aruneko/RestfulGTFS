@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  restful_gtfs:
+    build: .
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - '8000:8000'
+    environment:
+      - DB_HOST=database
+      - DB_USER=postgres
+      - DB_NAME=postgres
+      - DB_PORT=5432
+    depends_on:
+      - database
+    entrypoint:
+      - dockerize
+      - -timeout
+      - 60s
+      - -wait
+      - tcp://database:5432
+    command: python manage.py runserver 0.0.0.0:8000
+  database:
+    image: mdillon/postgis:11-alpine
