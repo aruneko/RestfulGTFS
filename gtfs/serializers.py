@@ -70,7 +70,7 @@ class StopSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
         )
 
 
-class RouteDetailSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
+class RouteSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
     update_date = serializers.CharField(source="route.update_date")
     origin_stop = serializers.CharField(source="route.origin_stop")
     via_stop = serializers.CharField(source="route.via_stop")
@@ -97,7 +97,7 @@ class RouteDetailSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
         )
 
 
-class ServiceDetailSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
+class ServiceSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = Service
         fields = "__all__"
