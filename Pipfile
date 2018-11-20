@@ -18,3 +18,6 @@ busformat = {git = "https://github.com/aruneko/django-japanese-standard-bus-info
 
 [requires]
 python_version = "3.7"
+
+[scripts]
+format = "black --py36 ."
