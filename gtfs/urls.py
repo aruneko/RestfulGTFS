@@ -12,6 +12,7 @@ router.register(r"routes", views.RouteViewSet)
 router.register(r"services", views.ServiceViewSet)
 router.register(r"trips", views.TripViewSet)
 router.register(r"offices", views.OfficeViewSet)
+router.register(r"fare_attributes", views.FareAttributeViewSet)
 
 stop_times_by_stop_router = NestedSimpleRouter(router, r"stops", lookup="stop")
 stop_times_by_stop_router.register(
