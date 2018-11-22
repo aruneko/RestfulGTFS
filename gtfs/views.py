@@ -36,9 +36,9 @@ class StopTimeViewSet(mixins.ListModelMixin, GenericViewSet):
 
     def get_queryset(self):
         if self.kwargs.get("stop_pk"):
-            return StopTime.objects.filter(stop__id=self.kwargs["stop_pk"])
+            return StopTime.objects.filter(stop__id=self.kwargs["stop_pk"]).order_by("departure_time")
         elif self.kwargs.get("trip_pk"):
-            return StopTime.objects.filter(trip__id=self.kwargs["trip_pk"])
+            return StopTime.objects.filter(trip__id=self.kwargs["trip_pk"]).order_by("sequence")
 
 
 class RouteViewSet(viewsets.ReadOnlyModelViewSet):
