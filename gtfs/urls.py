@@ -31,10 +31,16 @@ service_date_router.register(
 trips_by_route_router = NestedSimpleRouter(router, r"routes", lookup="route")
 trips_by_route_router.register(r"trips", views.TripViewSet, base_name="trips_by_route")
 
+trips_by_office_router = NestedSimpleRouter(router, r"offices", lookup="office")
+trips_by_office_router.register(
+    r"trips", views.TripViewSet, base_name="trips_by_office"
+)
+
 urlpatterns = [
     url(r"^", include(router.urls)),
     url(r"^", include(stop_times_by_stop_router.urls)),
     url(r"^", include(stop_times_by_trip_router.urls)),
     url(r"^", include(service_date_router.urls)),
     url(r"^", include(trips_by_route_router.urls)),
+    url(r"^", include(trips_by_office_router.urls)),
 ]
