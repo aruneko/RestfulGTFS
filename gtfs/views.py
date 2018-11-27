@@ -23,7 +23,8 @@ from gtfs.serializers import (
     OfficeSerializer,
     FareAttributeSerializer,
     FareRuleSerializer,
-    ShapeSerializer)
+    ShapeSerializer,
+)
 
 
 class AgencyViewSet(viewsets.ReadOnlyModelViewSet):
