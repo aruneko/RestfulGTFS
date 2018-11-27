@@ -45,6 +45,7 @@ fare_rules_by_fare_attribute_router.register(
     r"fare_rules", views.FareRuleViewSet, base_name="fare_rules_by_fare_attribute"
 )
 
+
 urlpatterns = [
     url(r"^", include(router.urls)),
     url(r"^", include(stop_times_by_stop_router.urls)),
