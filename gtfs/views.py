@@ -5,6 +5,7 @@ from jpbusformat.models.office import Office
 from jpbusformat.models.route import Route
 from jpbusformat.models.service import Service
 from jpbusformat.models.service_date import ServiceDate
+from jpbusformat.models.shape import Shape
 from jpbusformat.models.stop import Stop
 from jpbusformat.models.stop_time import StopTime
 from jpbusformat.models.trip import Trip
@@ -22,7 +23,7 @@ from gtfs.serializers import (
     OfficeSerializer,
     FareAttributeSerializer,
     FareRuleSerializer,
-)
+    ShapeSerializer)
 
 
 class AgencyViewSet(viewsets.ReadOnlyModelViewSet):
@@ -96,3 +97,8 @@ class FareAttributeViewSet(viewsets.ReadOnlyModelViewSet):
 class FareRuleViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = FareRule.objects.all()
     serializer_class = FareRuleSerializer
+
+
+class ShapeViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Shape.objects.all()
+    serializer_class = ShapeSerializer
