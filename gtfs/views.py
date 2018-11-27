@@ -1,5 +1,6 @@
 from jpbusformat.models.agency import Agency
 from jpbusformat.models.fare_attribute import FareAttribute
+from jpbusformat.models.fare_rule import FareRule
 from jpbusformat.models.office import Office
 from jpbusformat.models.route import Route
 from jpbusformat.models.service import Service
@@ -19,7 +20,9 @@ from gtfs.serializers import (
     ServiceDateSerializer,
     TripSerializer,
     OfficeSerializer,
-    FareAttributeSerializer)
+    FareAttributeSerializer,
+    FareRuleSerializer,
+)
 
 
 class AgencyViewSet(viewsets.ReadOnlyModelViewSet):
@@ -88,3 +91,8 @@ class OfficeViewSet(viewsets.ReadOnlyModelViewSet):
 class FareAttributeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = FareAttribute.objects.all()
     serializer_class = FareAttributeSerializer
+
+
+class FareRuleViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = FareRule.objects.all()
+    serializer_class = FareRuleSerializer

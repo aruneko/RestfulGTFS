@@ -37,6 +37,13 @@ trips_by_office_router.register(
     r"trips", views.TripViewSet, base_name="trips_by_office"
 )
 
+fare_rules_by_fare_attribute_router = NestedSimpleRouter(
+    router, r"fare_attributes", lookup="fare_attribute"
+)
+fare_rules_by_fare_attribute_router.register(
+    r"fare_rules", views.FareRuleViewSet, base_name="fare_rules_by_fare_attribute"
+)
+
 urlpatterns = [
     url(r"^", include(router.urls)),
     url(r"^", include(stop_times_by_stop_router.urls)),
@@ -44,4 +51,5 @@ urlpatterns = [
     url(r"^", include(service_date_router.urls)),
     url(r"^", include(trips_by_route_router.urls)),
     url(r"^", include(trips_by_office_router.urls)),
+    url(r"^", include(fare_rules_by_fare_attribute_router.urls)),
 ]
