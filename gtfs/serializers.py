@@ -121,10 +121,33 @@ class OfficeSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
         fields = "__all__"
 
 
+class FrequencySerializer(DynamicFieldsMixin, serializers.ModelSerializer):
+    class Meta:
+        model = Frequency
+        fields = "__all__"
+
+
 class TripSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
+    frequency = FrequencySerializer(read_only=True)
+
     class Meta:
         model = Trip
-        fields = "__all__"
+        fields = (
+            "id",
+            "route",
+            "service",
+            "headsign",
+            "short_name",
+            "direction_id",
+            "block_id",
+            "shape",
+            "wheelchair_accessible",
+            "bikes_allowed",
+            "desc",
+            "desc_symbol",
+            "office",
+            "frequency",
+        )
 
 
 class StopTimeSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
@@ -142,12 +165,6 @@ class FareAttributeSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
 class FareRuleSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = FareRule
-        fields = "__all__"
-
-
-class FrequencySerializer(DynamicFieldsMixin, serializers.ModelSerializer):
-    class Meta:
-        model = Frequency
         fields = "__all__"
 
 
