@@ -8,6 +8,7 @@ from jpbusformat.models.service_date import ServiceDate
 from jpbusformat.models.shape import Shape
 from jpbusformat.models.stop import Stop
 from jpbusformat.models.stop_time import StopTime
+from jpbusformat.models.transfer import Transfer
 from jpbusformat.models.trip import Trip
 from rest_framework import viewsets, mixins
 from rest_framework.viewsets import GenericViewSet
@@ -24,7 +25,9 @@ from gtfs.serializers import (
     FareAttributeSerializer,
     FareRuleSerializer,
     ShapeSerializer,
+    TransferSerializer,
 )
+from settings.viewsets import ListModelViewSet
 
 
 class AgencyViewSet(viewsets.ReadOnlyModelViewSet):
@@ -37,7 +40,7 @@ class StopViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = StopSerializer
 
 
-class StopTimeViewSet(mixins.ListModelMixin, GenericViewSet):
+class StopTimeViewSet(ListModelViewSet):
     serializer_class = StopTimeSerializer
 
     def get_queryset(self):
@@ -61,7 +64,7 @@ class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ServiceSerializer
 
 
-class ServiceDateViewSet(mixins.ListModelMixin, GenericViewSet):
+class ServiceDateViewSet(ListModelViewSet):
     serializer_class = ServiceDateSerializer
 
     def get_queryset(self):
@@ -103,3 +106,9 @@ class FareRuleViewSet(viewsets.ReadOnlyModelViewSet):
 class ShapeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Shape.objects.all()
     serializer_class = ShapeSerializer
+
+
+class TransferViewSet(ListModelViewSet):
+    queryset = Transfer.objects.all()
+    serializer_class = TransferSerializer
+    search_fields = ("from_stop", "to_stop")
