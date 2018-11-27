@@ -18,7 +18,7 @@
     "default": {
         "busformat": {
             "git": "https://github.com/aruneko/django-japanese-standard-bus-info-format.git",
-            "ref": "e02e27d22f6cb119fec35cd4455547cec82633f5"
+            "ref": "db62052491993194cee5720d0ca35af57bdc2fce"
         },
         "certifi": {
             "hashes": [
