@@ -1,6 +1,7 @@
 from jpbusformat.models.agency import Agency
 from jpbusformat.models.fare_attribute import FareAttribute
 from jpbusformat.models.fare_rule import FareRule
+from jpbusformat.models.feed_info import FeedInfo
 from jpbusformat.models.office import Office
 from jpbusformat.models.route import Route
 from jpbusformat.models.service import Service
@@ -26,7 +27,7 @@ from gtfs.serializers import (
     FareRuleSerializer,
     ShapeSerializer,
     TransferSerializer,
-)
+    FeedInfoSerializer)
 from settings.viewsets import ListModelViewSet
 
 
@@ -112,3 +113,8 @@ class TransferViewSet(ListModelViewSet):
     queryset = Transfer.objects.all()
     serializer_class = TransferSerializer
     search_fields = ("from_stop", "to_stop")
+
+
+class FeedInfoViewSet(ListModelViewSet):
+    queryset = FeedInfo.objects.all()
+    serializer_class = FeedInfoSerializer
