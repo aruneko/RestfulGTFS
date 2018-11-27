@@ -21,4 +21,4 @@ drf-dynamic-fields = "*"
 python_version = "3.7"
 
 [scripts]
-format = "black --py36 ."
+fmt = "black --py36 ."
