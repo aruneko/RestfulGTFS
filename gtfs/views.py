@@ -10,9 +10,9 @@ from jpbusformat.models.shape import Shape
 from jpbusformat.models.stop import Stop
 from jpbusformat.models.stop_time import StopTime
 from jpbusformat.models.transfer import Transfer
+from jpbusformat.models.translation import Translation
 from jpbusformat.models.trip import Trip
-from rest_framework import viewsets, mixins
-from rest_framework.viewsets import GenericViewSet
+from rest_framework import viewsets
 
 from gtfs.serializers import (
     AgencySerializer,
@@ -27,7 +27,9 @@ from gtfs.serializers import (
     FareRuleSerializer,
     ShapeSerializer,
     TransferSerializer,
-    FeedInfoSerializer)
+    FeedInfoSerializer,
+    TranslationSerializer,
+)
 from settings.viewsets import ListModelViewSet
 
 
@@ -118,3 +120,9 @@ class TransferViewSet(ListModelViewSet):
 class FeedInfoViewSet(ListModelViewSet):
     queryset = FeedInfo.objects.all()
     serializer_class = FeedInfoSerializer
+
+
+class TranslationViewSet(ListModelViewSet):
+    queryset = Translation.objects.all()
+    serializer_class = TranslationSerializer
+    search_fields = ("trans_id", "lang")
