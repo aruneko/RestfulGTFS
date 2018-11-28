@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.gis",
     "django_filters",
+    "drf_yasg",
     "jpbusformat",
     "rest_framework",
     "rest_framework_gis",

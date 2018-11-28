@@ -16,10 +16,28 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.documentation import include_docs_urls
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework.permissions import AllowAny
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="標準的なバス情報フォーマットAPI",
+        default_version="v1",
+        description="標準的なバス情報フォーマットに従ったRestAPIの仕様書",
+        license=openapi.License(name="MIT License"),
+    ),
+    public=True,
+    permission_classes=(AllowAny,),
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     url(r"^", include("gtfs.urls")),
-    url(r"^", include_docs_urls(title="標準的なバス情報フォーマットAPI ドキュメント")),
+    url(
+        r"^(?P<format>\.json|\.yaml)$",
+        schema_view.without_ui(cache_timeout=0),
+        name="schema-json",
+    ),
+    url(r"^", schema_view.with_ui("redoc", cache_timeout=0)),
 ]
