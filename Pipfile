@@ -16,6 +16,7 @@ drf-nested-routers = "*"
 django-filter = "*"
 busformat = {git = "https://github.com/aruneko/django-japanese-standard-bus-info-format.git",ref = "master"}
 drf-dynamic-fields = "*"
+drf-yasg = "*"
 
 [requires]
 python_version = "3.7"
