@@ -22,27 +22,35 @@ class AgencySerializer(DynamicFieldsMixin, serializers.ModelSerializer):
     official_name = serializers.CharField(
         allow_blank=True,
         allow_null=True,
+        required=False,
         help_text="事業者正式名称",
         source="agency.official_name",
     )
     zip_number = serializers.CharField(
         allow_blank=True,
         allow_null=True,
+        required=False,
         help_text="事業者郵便番号",
         source="agency.zip_number",
     )
     address = serializers.CharField(
-        allow_blank=True, allow_null=True, help_text="事業者住所", source="agency.address"
+        allow_blank=True,
+        allow_null=True,
+        required=False,
+        help_text="事業者住所",
+        source="agency.address",
     )
     president_pos = serializers.CharField(
         allow_blank=True,
         allow_null=True,
+        required=False,
         help_text="代表者肩書",
         source="agency.president_pos",
     )
     president_name = serializers.CharField(
         allow_blank=True,
         allow_null=True,
+        required=False,
         help_text="代表者氏名",
         source="agency.president_name",
     )
@@ -96,23 +104,31 @@ class RouteSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
     update_date = serializers.CharField(
         allow_blank=True,
         allow_null=True,
+        required=False,
         help_text="ダイヤ改正日",
-        source="route.update_date")
+        source="route.update_date",
+    )
     origin_stop = serializers.CharField(
         allow_blank=True,
         allow_null=True,
+        required=False,
         help_text="起点",
-        source="route.origin_stop")
+        source="route.origin_stop",
+    )
     via_stop = serializers.CharField(
         allow_blank=True,
         allow_null=True,
+        required=False,
         help_text="経由地",
-        source="route.via_stop")
+        source="route.via_stop",
+    )
     destination_stop = serializers.CharField(
         allow_blank=True,
         allow_null=True,
+        required=False,
         help_text="終点",
-        source="route.destination_stop")
+        source="route.destination_stop",
+    )
 
     class Meta:
         model = Route
