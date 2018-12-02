@@ -44,6 +44,42 @@ fields_param = openapi.Parameter(
     type=openapi.TYPE_STRING,
 )
 
+stop_name_param = openapi.Parameter(
+    "name", openapi.IN_QUERY, description="検索対象のバス停名称(前方一致検索)", type=openapi.TYPE_STRING
+)
+
+location_type_param = openapi.Parameter(
+    "location_type",
+    openapi.IN_QUERY,
+    description="指定したlocation_typeのみを抽出",
+    type=openapi.TYPE_INTEGER,
+)
+
+from_stop_param = openapi.Parameter(
+    "from_stop",
+    openapi.IN_QUERY,
+    description="指定した乗継元のstop_idのみを抽出",
+    type=openapi.TYPE_STRING,
+)
+
+to_stop_param = openapi.Parameter(
+    "to_stop",
+    openapi.IN_QUERY,
+    description="指定した乗継先のstop_idのみを抽出",
+    type=openapi.TYPE_STRING,
+)
+
+trans_id_param = openapi.Parameter(
+    "trans_id",
+    openapi.IN_QUERY,
+    description="指定した翻訳元日本語のみを抽出",
+    type=openapi.TYPE_STRING,
+)
+
+lang_param = openapi.Parameter(
+    "lang", openapi.IN_QUERY, description="指定した言語コードのみを抽出", type=openapi.TYPE_STRING
+)
+
 
 # define view sets
 @method_decorator(
@@ -63,7 +99,10 @@ class AgencyViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 @method_decorator(
-    name="list", decorator=swagger_auto_schema(manual_parameters=[fields_param])
+    name="list",
+    decorator=swagger_auto_schema(
+        manual_parameters=[fields_param, stop_name_param, location_type_param]
+    ),
 )
 class StopViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -128,6 +167,7 @@ class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
     list:
     運行区分の一覧を返します
     """
+
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
 
@@ -140,6 +180,7 @@ class ServiceDateViewSet(ListModelViewSet):
     list:
     運行日情報の一覧を返します
     """
+
     serializer_class = ServiceDateSerializer
 
     def get_queryset(self):
@@ -157,6 +198,7 @@ class TripViewSet(viewsets.ReadOnlyModelViewSet):
     list:
     便情報の一覧を返します
     """
+
     queryset = Trip.objects.all()
     serializer_class = TripSerializer
 
@@ -178,6 +220,7 @@ class OfficeViewSet(viewsets.ReadOnlyModelViewSet):
     list:
     営業所の一覧を返します
     """
+
     queryset = Office.objects.all()
     serializer_class = OfficeSerializer
 
@@ -199,6 +242,7 @@ class FareAttributeViewSet(viewsets.ReadOnlyModelViewSet):
     list:
     運賃属性の一覧を返します
     """
+
     queryset = FareAttribute.objects.all()
     serializer_class = FareAttributeSerializer
 
@@ -214,6 +258,7 @@ class FareRuleViewSet(viewsets.ReadOnlyModelViewSet):
     list:
     運賃定義の一覧を返します
     """
+
     queryset = FareRule.objects.all()
     serializer_class = FareRuleSerializer
 
@@ -229,18 +274,23 @@ class ShapeViewSet(viewsets.ReadOnlyModelViewSet):
     list:
     描画情報の一覧を返します
     """
+
     queryset = Shape.objects.all()
     serializer_class = ShapeSerializer
 
 
 @method_decorator(
-    name="list", decorator=swagger_auto_schema(manual_parameters=[fields_param])
+    name="list",
+    decorator=swagger_auto_schema(
+        manual_parameters=[fields_param, from_stop_param, to_stop_param]
+    ),
 )
 class TransferViewSet(ListModelViewSet):
     """
     list:
     乗り換え情報の一覧を返します
     """
+
     queryset = Transfer.objects.all()
     serializer_class = TransferSerializer
     search_fields = ("from_stop", "to_stop")
@@ -254,18 +304,23 @@ class FeedInfoViewSet(ListModelViewSet):
     list:
     提供情報の一覧を返します
     """
+
     queryset = FeedInfo.objects.all()
     serializer_class = FeedInfoSerializer
 
 
 @method_decorator(
-    name="list", decorator=swagger_auto_schema(manual_parameters=[fields_param])
+    name="list",
+    decorator=swagger_auto_schema(
+        manual_parameters=[fields_param, trans_id_param, lang_param]
+    ),
 )
 class TranslationViewSet(ListModelViewSet):
     """
     list:
     翻訳情報の一覧を返します
     """
+
     queryset = Translation.objects.all()
     serializer_class = TranslationSerializer
     search_fields = ("trans_id", "lang")
